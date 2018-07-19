@@ -65,3 +65,8 @@ Please remember that your patch must consist of multiple separate commits. Your 
 If you notice more bugs in the original implementation you can add fixes for those as well. You won't be penalized if you don't. However we ask you not to add more features than the one given in the mission list.
 
 Let's rock! :metal:
+
+## TODO
+- Styling
+- Initial States from Server
+- Top Charities

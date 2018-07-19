@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const config = {
   entry: './src/index.js',
@@ -30,6 +31,9 @@ const config = {
       },
     ],
   },
+  plugins: [
+    new webpack.EnvironmentPlugin( [ 'NODE_ENV' ]),
+  ],
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src'),
