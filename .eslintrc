@@ -8,6 +8,7 @@
     "react"
   ],
   "rules": {
+    "semi": [1, "always", { "omitLastInOneLineBlock": true }],
     "quotes": [2, "single"],
     "prefer-const": 2,
     "no-const-assign": 2,
