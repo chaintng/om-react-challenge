@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 
 import { summaryDonations } from './helpers';
 import Card from './components/Card';
+import Notification from './components/Notification';
 
 export default connect((state) => state)(
   class App extends Component {
@@ -69,19 +70,11 @@ export default connect((state) => state)(
         <Card key={i} {...item} handlePay={this.handlePay}/>
       ));
 
-      const style = {
-        color: 'red',
-        margin: '1em 0',
-        fontWeight: 'bold',
-        fontSize: '16px',
-        textAlign: 'center',
-      };
-
       return (
         <div>
           <h1>Tamboon React</h1>
           <p>All donations: {donate}</p>
-          <p style={style}>{message}</p>
+          <Notification message={message} />
           {cards}
         </div>
       );
