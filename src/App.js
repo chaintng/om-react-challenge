@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
 
 import { summaryDonations } from './helpers';
-import Notification from './components/Notification';
 import CardList from '~/components/CardList';
+import Notification from './components/Notification';
+import { updateMessage, updateTotalDonate } from '~/actions/App';
 
 class App extends Component {
   constructor(props) {
@@ -34,10 +35,7 @@ class App extends Component {
         return resp.json();
       })
       .then(function (data) {
-        self.props.dispatch({
-          type: 'UPDATE_TOTAL_DONATE',
-          amount: summaryDonations(data.map((item) => (item.amount))),
-        });
+        self.props.dispatch(updateTotalDonate(summaryDonations(data.map((item) => (item.amount)))));
       });
   }
 
@@ -51,20 +49,11 @@ class App extends Component {
         return resp.json();
       })
       .then(function () {
-        self.props.dispatch({
-          type: 'UPDATE_TOTAL_DONATE',
-          amount,
-        });
-        self.props.dispatch({
-          type: 'UPDATE_MESSAGE',
-          message: `Thanks for donate ${amount}!`,
-        });
+        self.props.dispatch(updateMessage(amount));
+        self.props.dispatch(updateMessage(`Thanks for donate ${amount}!`));
 
         setTimeout(function () {
-          self.props.dispatch({
-            type: 'UPDATE_MESSAGE',
-            message: '',
-          });
+          self.props.dispatch(updateMessage(''));
         }, 2000);
       });
   }
