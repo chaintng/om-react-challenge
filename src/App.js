@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
 
@@ -84,4 +85,4 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({...state.app});
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(hot(module)(App));
