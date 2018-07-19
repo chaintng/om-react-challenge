@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
 
 import { summaryDonations } from './helpers';
-import Card from './components/Card';
 import Notification from './components/Notification';
+import CardList from '~/components/CardList';
 
 export default connect((state) => state)(
   class App extends Component {
@@ -66,16 +66,13 @@ export default connect((state) => state)(
 
     render() {
       const { donate, message } = this.props;
-      const cards = this.state.charities.map((item, i) => (
-        <Card key={i} {...item} handlePay={this.handlePay}/>
-      ));
 
       return (
         <div>
           <h1>Tamboon React</h1>
           <p>All donations: {donate}</p>
           <Notification message={message} />
-          {cards}
+          <CardList charities={this.state.charities} handlePay={this.handlePay}/>
         </div>
       );
     }
