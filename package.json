@@ -12,6 +12,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-preset-es2017": "^6.24.1",
+    "dotenv": "^6.0.0",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.2",
     "react": "^16.0.0",

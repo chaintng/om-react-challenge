@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path');
 const webpack = require('webpack');
 
@@ -32,7 +34,7 @@ const config = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin( [ 'NODE_ENV' ]),
+    new webpack.EnvironmentPlugin( [ 'NODE_ENV', 'BACKEND_ENDPOINT' ]),
   ],
   resolve: {
     alias: {

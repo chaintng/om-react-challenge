@@ -6,7 +6,7 @@ import fetch from 'isomorphic-fetch';
 import { summaryDonations } from './helpers';
 import CardList from '~/components/CardList';
 import Notification from './components/Notification';
-import { updateMessage, updateTotalDonate } from '~/actions/App';
+import { updateMessage, updateTotalDonate, payDonation } from '~/actions/App';
 
 class App extends Component {
   constructor(props) {
@@ -39,23 +39,12 @@ class App extends Component {
       });
   }
 
-  handlePay(id, amount, currency) {
-    const self = this;
-    fetch('http://localhost:3001/payments', {
-      method: 'POST',
-      body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
-    })
-      .then(function (resp) {
-        return resp.json();
-      })
-      .then(function () {
-        self.props.dispatch(updateMessage(amount));
-        self.props.dispatch(updateMessage(`Thanks for donate ${amount}!`));
-
-        setTimeout(function () {
-          self.props.dispatch(updateMessage(''));
-        }, 2000);
-      });
+  handlePay(charitiesId, amount, currency) {
+    this.props.dispatch(payDonation({
+      charitiesId,
+      amount,
+      currency,
+    }))
   }
 
   render() {
