@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CardList from '~/components/CardList';
 import Notification from './components/Notification';
 import SearchBox from './components/SearchBox';
-import { payDonation, hydrateAppData } from '~/actions/App';
+import { payDonation, hydrateAppData, searchKeywordChange } from '~/actions/App';
 import styled from 'styled-components';
 import { numberWithCommas } from '~/helpers';
 
@@ -34,6 +34,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handlePay = this.handlePay.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +49,10 @@ class App extends Component {
     }));
   }
 
+  onSearch(searchKeyword) {
+    this.props.dispatch(searchKeywordChange(searchKeyword));
+  }
+
   render() {
     const {charities, donate, notification} = this.props;
 
@@ -60,7 +65,7 @@ class App extends Component {
           </DivContainer>
         </Header>
         <DivContainer>
-          <SearchBox/>
+          <SearchBox onSearch={this.onSearch}/>
           <Notification {...notification} />
           <CardList charities={charities} handlePay={this.handlePay}/>
         </DivContainer>

@@ -6,8 +6,8 @@ export const Wrapper = styled.div`
   box-shadow: 5px 10px 18px #BBB;
   border-radius: 3px;
   margin-bottom: 50px;
-  position: relative;
   overflow: hidden;
+  transition: opacity 2s;
 `;
 
 export const CardCoverImageWrapper = styled.div`

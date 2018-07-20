@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -19,10 +20,15 @@ class SearchBox extends Component {
   render() {
     return (
       <Wrapper>
-        <div style={{margin: '0px 10px'}}><i className="fa fa-search"></i></div><input type="text" />
+        <div style={{margin: '0px 10px'}}><i className="fa fa-search"></i></div>
+        <input type="text" onChange={(e) => this.props.onSearch(e.target.value)}/>
       </Wrapper>
     );
   }
 }
+
+SearchBox.propTypes = {
+  onSearch: PropTypes.func,
+};
 
 export default SearchBox;

@@ -9,7 +9,10 @@ function app(state = defaultState, action) {
   switch (action.type) {
     case 'INITIALIZE_CHARITIES':
       return { ...state,
-        charities: action.charities,
+        charities: action.charities.map((item) => {
+          item.visible = true;
+          return item;
+        }),
       };
     case 'UPDATE_TOTAL_DONATE':
       return { ...state,
@@ -21,12 +24,19 @@ function app(state = defaultState, action) {
           ...state.notification,
           visible: action.visible,
         },
-      }
+      };
     case 'UPDATE_MESSAGE':
       return { ...state,
         notification: action.notification,
       };
 
+    case 'SEARCH_KEYWORD_CHANGE':
+      return { ...state,
+        charities: state.charities.map((item) => {
+          item.visible = item.name.toLowerCase().indexOf(action.searchKeyword.toLowerCase()) >= 0;
+          return item;
+        }),
+      };
     default:
       return state;
   }

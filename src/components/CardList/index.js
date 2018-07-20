@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from '~/components/Card';
 import styled from 'styled-components';
+import FlipMove from 'react-flip-move';
 
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  position: relative;
   
   > div {
     flex-basis: 600px;
@@ -21,13 +23,16 @@ const Wrapper = styled.div`
 class CardList extends Component {
   render() {
     const { charities, handlePay } = this.props;
-    const cards = charities.map((item, i) => (
-      <Card key={i} {...item} handlePay={handlePay}/>
+    const displayCharities = charities.filter((item) => item.visible);
+    const cards = displayCharities.map((item, i) => (
+      <Card key={item.name} {...item} handlePay={handlePay}/>
     ));
 
     return (
       <Wrapper>
-        {cards}
+        <FlipMove typeName={null}>
+          {cards}
+        </FlipMove>
       </Wrapper>
     );
   }

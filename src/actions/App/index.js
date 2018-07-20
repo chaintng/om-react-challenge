@@ -37,6 +37,13 @@ export const hideMessage = (visible) => {
   };
 };
 
+export const searchKeywordChange = (searchKeyword) => {
+  return {
+    type: 'SEARCH_KEYWORD_CHANGE',
+    searchKeyword,
+  };
+};
+
 // redux thunk
 
 export const payDonation = ({charitiesId, amount, currency}) => {

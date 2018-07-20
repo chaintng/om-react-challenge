@@ -63,7 +63,7 @@ class Card extends Component {
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper visible={this.props.visible}>
         <CardWithImage {...this.props}
           handleDonate={this.togglePaymentDialog}
         />
