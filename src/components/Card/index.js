@@ -5,9 +5,18 @@ import styled from 'styled-components';
 import { donationAmountOption } from '~/constants';
 
 const Wrapper = styled.div`
-  max-width: 400px;
   margin: 10px;
   border: 1px solid #ccc;
+  box-shadow: 5px 10px 18px #BBB;
+  border-radius: 3px;
+  margin-bottom: 50px;
+`;
+
+const CardCoverImageWrapper = styled.div`
+  max-height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 `;
 
 const CardWithImageWrapper = styled.div`
@@ -33,7 +42,9 @@ const CardCaption = styled.div`
 
 function CardWithImage({name}) {
   return <CardWithImageWrapper>
-    <div><img src={`/images/${changeCase.paramCase(name)}.jpg`}/></div>
+    <CardCoverImageWrapper>
+      <img src={`/images/${changeCase.paramCase(name)}.jpg`}/>
+    </CardCoverImageWrapper>
     <CardCaption>
       <div>{name}</div>
       <button>Donate</button>

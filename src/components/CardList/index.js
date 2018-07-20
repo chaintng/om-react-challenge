@@ -1,6 +1,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from '~/components/Card';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+  > div {
+    flex-basis: 600px;
+  }
+  
+  &:after {
+    content: "";
+    flex-basis: 600px;
+  }
+`;
 
 class CardList extends Component {
   render() {
@@ -10,9 +26,9 @@ class CardList extends Component {
     ));
 
     return (
-      <div>
+      <Wrapper>
         {cards}
-      </div>
+      </Wrapper>
     );
   }
 }

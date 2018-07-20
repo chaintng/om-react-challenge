@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { hot } from 'react-hot-loader'
+import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import CardList from '~/components/CardList';
 import Notification from './components/Notification';
@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(hydrateAppData())
+    this.props.dispatch(hydrateAppData());
   }
 
   handlePay(charitiesId, amount, currency) {
@@ -34,8 +34,8 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Tamboon React</h1>
-        <p>All donations: {donate}</p>
+        <h1 style={{ textAlign: 'center' }}>Tamboon React</h1>
+        <p style={{ textAlign: 'center' }}>All donations: {donate}</p>
         <Notification message={message}/>
         <CardList charities={charities} handlePay={this.handlePay}/>
       </div>

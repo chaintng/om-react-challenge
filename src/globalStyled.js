@@ -7,7 +7,7 @@ export default function injectGlobalByTheme(theme) {
         html {
           font-family: Arial, Helvetica, sans-serif;
           color: #666;
-          font-size: 1.2em;
+          font-size: 1.1em;
         }
         
         a.button, button {
