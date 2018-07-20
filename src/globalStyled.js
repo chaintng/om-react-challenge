@@ -27,7 +27,7 @@ export default function injectGlobalByTheme(theme) {
           border: 1px solid dodgerblue;
         }
         
-        textarea, select, input, button { outline: none; }
+        textarea:focus, select:focus, input:focus, button:focus { outline: none; }
       `;
       break;
   }

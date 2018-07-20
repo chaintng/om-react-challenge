@@ -8,6 +8,11 @@ import { payDonation, hydrateAppData } from '~/actions/App';
 import styled from 'styled-components';
 import { numberWithCommas } from '~/helpers';
 
+const Wrapper = styled.div`
+  width: 100vw;
+  overflow: hidden;
+`;
+
 const Header = styled.div`
   background: lightblue;
   color: white;
@@ -47,7 +52,7 @@ class App extends Component {
     const {charities, donate, notification} = this.props;
 
     return (
-      <div>
+      <Wrapper>
         <Header>
           <DivContainer>
             <h1>Omise Tamboon React</h1>
@@ -59,7 +64,7 @@ class App extends Component {
           <Notification {...notification} />
           <CardList charities={charities} handlePay={this.handlePay}/>
         </DivContainer>
-      </div>
+      </Wrapper>
     );
   }
 }
