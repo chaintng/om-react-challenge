@@ -3,17 +3,31 @@ import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import CardList from '~/components/CardList';
 import Notification from './components/Notification';
+import SearchBox from './components/SearchBox';
 import { payDonation, hydrateAppData } from '~/actions/App';
+import styled from 'styled-components';
+import { numberWithCommas } from '~/helpers';
+
+const Header = styled.div`
+  background: lightblue;
+  color: white;
+  padding: 10px;
+  
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;
+
+const DivContainer = styled.div`
+  max-width: 1300px;
+  margin: auto;
+`;
 
 class App extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      charities: [],
-      selectedAmount: 10,
-    };
-
     this.handlePay = this.handlePay.bind(this);
   }
 
@@ -34,10 +48,17 @@ class App extends Component {
 
     return (
       <div>
-        <h1 style={{ textAlign: 'center' }}>Omise Tamboon React</h1>
-        <p style={{ textAlign: 'center' }}>All donations: {donate}</p>
-        <Notification {...notification} />
-        <CardList charities={charities} handlePay={this.handlePay}/>
+        <Header>
+          <DivContainer>
+            <h1>Omise Tamboon React</h1>
+            <p style={{ textAlign: 'center' }}><strong>TOTAL DONATION:</strong> {numberWithCommas(donate)}</p>
+          </DivContainer>
+        </Header>
+        <DivContainer>
+          <SearchBox/>
+          <Notification {...notification} />
+          <CardList charities={charities} handlePay={this.handlePay}/>
+        </DivContainer>
       </div>
     );
   }

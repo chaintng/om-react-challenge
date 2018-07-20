@@ -10,7 +10,7 @@ export default function injectGlobalByTheme(theme) {
           font-size: 1.1em;
         }
         
-        h1, h2, h3, h4 {
+        body, h1, h2, h3, h4 {
           margin: 0px;
         }
         

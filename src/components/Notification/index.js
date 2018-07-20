@@ -8,12 +8,12 @@ const NotificationDiv = styled.div`
   text-align: center;
   transition: opacity 0.5s linear;
   opacity: ${props => props.visible ? 1 : 0};
-  position: absolute;
+  position: fixed;
   right: 0%;
   min-width: 400px;
   max-width: 800px;
   z-index: 99;
-  top: 20px;
+  top: 100px;
   
   > div {
     color: white;
