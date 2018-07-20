@@ -34,8 +34,28 @@ const PaymentWrapper = styled.div`
   width: 100%;
   height: 100%;
   top: 0px;
-  background: rgba(255, 255, 255, 0.8);
-`
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  flex: none;
+  
+  > * {
+    flex-basis: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  > i {
+    justify-content: flex-end;
+    padding: 0px 20px;
+  }
+`;
+
+const PaymentOption = styled.div`
+  dislay: flex;
+  justify-content: space-around;
+`;
 
 const CardCaption = styled.div`
   display: flex;
@@ -77,9 +97,10 @@ function PaymentDialog({visible, id, currency, handleSelectAmount, handlePay, ha
   ));
 
   return <PaymentWrapper visible={visible}>
-    <button onClick={handleCloseDialog}>X</button>
-    {payments}
-    <button onClick={handlePay}>Pay</button>
+    <i className="fas fa-times" onClick={handleCloseDialog}></i>
+    <div>Select the amount to donate (USD)</div>
+    <PaymentOption>{payments}</PaymentOption>
+    <div style={{flexBasis: 'auto'}}><button onClick={handlePay}>Pay</button></div>
   </PaymentWrapper>;
 }
 
@@ -92,18 +113,23 @@ class Card extends Component {
     };
     this.handleSelectAmount = this.handleSelectAmount.bind(this);
     this.togglePaymentDialog = this.togglePaymentDialog.bind(this);
+    this.handlePay = this.handlePay.bind(this);
   }
 
   togglePaymentDialog() {
     this.setState({ showPaymentDialog: !this.state.showPaymentDialog });
   }
 
+  handlePay() {
+    this.togglePaymentDialog();
+    return this.props.handlePay(this.props.id, this.state.selectedAmount, this.props.currency);
+  }
+  
   handleSelectAmount(amount) {
     this.setState({selectedAmount: amount});
   }
 
   render() {
-    const {id, currency, handlePay} = this.props;
     return (
       <Wrapper>
         <CardWithImage {...this.props}
@@ -113,7 +139,7 @@ class Card extends Component {
           visible={this.state.showPaymentDialog}
           handleCloseDialog={this.togglePaymentDialog}
           handleSelectAmount={this.handleSelectAmount}
-          handlePay={() => handlePay(id, this.state.selectedAmount, currency)}/>
+          handlePay={this.handlePay}/>
       </Wrapper>
     );
   }
