@@ -6,6 +6,7 @@ import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import App from './App';
 import rootReducer from './reducers';
+import injectGlobalByTheme from './globalStyled';
 
 const loggerMiddleware = createLogger();
 
@@ -16,6 +17,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const store = createStore(rootReducer, applyMiddleware(...reduxMiddleware));
+
+const selectedTheme = store.getState().selectedTheme || 'default';
+
+injectGlobalByTheme(selectedTheme);
 
 render(
   <Provider store={store}>

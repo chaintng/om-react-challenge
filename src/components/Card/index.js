@@ -16,13 +16,28 @@ const CardWithImageWrapper = styled.div`
   }
 `;
 
+const CardCaption = styled.div`
+  display: flex;
+  padding: 10px;
+  
+  > * {
+    flex: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  > button {
+    flex: 0 0 50px;
+  }
+`;
+
 function CardWithImage({name}) {
   return <CardWithImageWrapper>
     <div><img src={`/images/${changeCase.paramCase(name)}.jpg`}/></div>
-    <div>
+    <CardCaption>
       <div>{name}</div>
-      <button>Pay</button>
-    </div>
+      <button>Donate</button>
+    </CardCaption>
   </CardWithImageWrapper>;
 }
 
