@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   box-shadow: 5px 10px 18px #BBB;
   border-radius: 3px;
   margin-bottom: 50px;
+  position: relative;
+  overflow: hidden;
 `;
 
 const CardCoverImageWrapper = styled.div`
@@ -24,6 +26,16 @@ const CardWithImageWrapper = styled.div`
     width: 100%;
   }
 `;
+
+const PaymentWrapper = styled.div`
+  transform: translateY(${props => props.visible ? '0%' : '100%'});
+  transition: transform .2s ease-in;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: rgba(255, 255, 255, 0.8);
+`
 
 const CardCaption = styled.div`
   display: flex;
@@ -40,19 +52,19 @@ const CardCaption = styled.div`
   }
 `;
 
-function CardWithImage({name}) {
+function CardWithImage({name, handleDonate}) {
   return <CardWithImageWrapper>
     <CardCoverImageWrapper>
       <img src={`/images/${changeCase.paramCase(name)}.jpg`}/>
     </CardCoverImageWrapper>
     <CardCaption>
       <div>{name}</div>
-      <button>Donate</button>
+      <button onClick={handleDonate}>Donate</button>
     </CardCaption>
   </CardWithImageWrapper>;
 }
 
-function PaymentDialog({id, currency, handleSelectAmount, handlePay}) {
+function PaymentDialog({visible, id, currency, handleSelectAmount, handlePay, handleCloseDialog}) {
   const payments = donationAmountOption.map((amount, j) => (
     <label key={j}>
       <input
@@ -64,19 +76,26 @@ function PaymentDialog({id, currency, handleSelectAmount, handlePay}) {
     </label>
   ));
 
-  return <div>
+  return <PaymentWrapper visible={visible}>
+    <button onClick={handleCloseDialog}>X</button>
     {payments}
     <button onClick={handlePay}>Pay</button>
-  </div>;
+  </PaymentWrapper>;
 }
 
 class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showPaymentDialog: false,
       selectedAmount: 10,
     };
     this.handleSelectAmount = this.handleSelectAmount.bind(this);
+    this.togglePaymentDialog = this.togglePaymentDialog.bind(this);
+  }
+
+  togglePaymentDialog() {
+    this.setState({ showPaymentDialog: !this.state.showPaymentDialog });
   }
 
   handleSelectAmount(amount) {
@@ -87,8 +106,12 @@ class Card extends Component {
     const {id, currency, handlePay} = this.props;
     return (
       <Wrapper>
-        <CardWithImage {...this.props} />
+        <CardWithImage {...this.props}
+          handleDonate={this.togglePaymentDialog}
+        />
         <PaymentDialog {...this.props}
+          visible={this.state.showPaymentDialog}
+          handleCloseDialog={this.togglePaymentDialog}
           handleSelectAmount={this.handleSelectAmount}
           handlePay={() => handlePay(id, this.state.selectedAmount, currency)}/>
       </Wrapper>

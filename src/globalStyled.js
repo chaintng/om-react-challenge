@@ -17,6 +17,8 @@ export default function injectGlobalByTheme(theme) {
           color: dodgerblue;
           border: 1px solid dodgerblue;
         }
+        
+        textarea, select, input, button { outline: none; }
       `;
       break;
   }
