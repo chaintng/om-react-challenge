@@ -52,6 +52,9 @@ export const payDonation = ({charitiesId, amount, currency}) => {
       const response = await fetch(`${config.BACKEND_ENDPOINT}/payments`, {
         method: 'POST',
         body: JSON.stringify({ charitiesId, amount, currency }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
 
       if (response.status === 404) {

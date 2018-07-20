@@ -25,7 +25,7 @@ class CardList extends Component {
     const { charities, handlePay } = this.props;
     const displayCharities = charities.filter((item) => item.visible);
     const cards = displayCharities.map((item, i) => (
-      <Card key={item.charitiesId} {...item} handlePay={handlePay}/>
+      <Card key={item.id} {...item} handlePay={handlePay}/>
     ));
 
     return (

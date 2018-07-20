@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   margin-bottom: 50px;
   overflow: hidden;
   transition: opacity 2s;
+  position: relative;
 `;
 
 export const CardCoverImageWrapper = styled.div`

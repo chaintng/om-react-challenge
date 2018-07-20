@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import CardList from '~/components/CardList';
 import Notification from './components/Notification';
 import SearchBox from './components/SearchBox';
+import TotalDonation from './components/TotalDonation';
 import { payDonation, hydrateAppData, searchKeywordChange } from '~/actions/App';
 import styled from 'styled-components';
-import { numberWithCommas } from '~/helpers';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -61,7 +61,10 @@ class App extends Component {
         <Header>
           <DivContainer>
             <h1>Omise Tamboon React</h1>
-            <p style={{ textAlign: 'center' }}><strong>TOTAL DONATION:</strong> {numberWithCommas(donate)}</p>
+            <div style={{ textAlign: 'center' }}>
+              <div>TOTAL DONATION</div>
+              <TotalDonation totalAmount={donate}></TotalDonation>
+            </div>
           </DivContainer>
         </Header>
         <DivContainer>
