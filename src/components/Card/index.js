@@ -4,15 +4,26 @@ import * as changeCase from 'change-case';
 import styled from 'styled-components';
 import { donationAmountOption } from '~/constants';
 
-const CardDiv = styled.div`
+const Wrapper = styled.div`
+  max-width: 400px;
   margin: 10px;
   border: 1px solid #ccc;
 `;
 
+const CardWithImageWrapper = styled.div`
+  img {
+    width: 100%;
+  }
+`;
+
 function CardWithImage({name}) {
-  return <div>
-    <img src={`/images/${changeCase.paramCase(name)}.jpg`}/>
-  </div>;
+  return <CardWithImageWrapper>
+    <div><img src={`/images/${changeCase.paramCase(name)}.jpg`}/></div>
+    <div>
+      <div>{name}</div>
+      <button>Pay</button>
+    </div>
+  </CardWithImageWrapper>;
 }
 
 function PaymentDialog({id, currency, handleSelectAmount, handlePay}) {
@@ -49,12 +60,12 @@ class Card extends Component {
   render() {
     const {id, currency, handlePay} = this.props;
     return (
-      <CardDiv>
+      <Wrapper>
         <CardWithImage {...this.props} />
         <PaymentDialog {...this.props}
           handleSelectAmount={this.handleSelectAmount}
           handlePay={() => handlePay(id, this.state.selectedAmount, currency)}/>
-      </CardDiv>
+      </Wrapper>
     );
   }
 }
