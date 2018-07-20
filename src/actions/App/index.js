@@ -17,10 +17,23 @@ export const updateTotalDonate = (amount) => {
   };
 };
 
-export const updateMessage = (message) => {
+export const updateMessage = (visible, level, message) => {
   return {
     type: 'UPDATE_MESSAGE',
-    message,
+    notification: {
+      visible,
+      level,
+      message,
+    },
+  };
+};
+
+export const hideMessage = (visible) => {
+  return {
+    type: 'HIDE_MESSAGE',
+    notification: {
+      visible,
+    },
   };
 };
 
@@ -29,20 +42,25 @@ export const updateMessage = (message) => {
 export const payDonation = ({charitiesId, amount, currency}) => {
   return async (dispatch) => {
     try {
-      await fetch(`${config.BACKEND_ENDPOINT}/payments`, {
+      const response = await fetch(`${config.BACKEND_ENDPOINT}/payments`, {
         method: 'POST',
         body: JSON.stringify({ charitiesId, amount, currency }),
       });
 
-      dispatch(updateTotalDonate(amount));
-      dispatch(updateMessage(`Thanks for donate ${amount}!`));
+      if (response.status === 404) {
+        throw response;
+      }
 
-      setTimeout(function () {
-        dispatch(updateMessage(''));
-      }, 2000);
+      dispatch(updateTotalDonate(amount));
+      dispatch(updateMessage(true, 'success', `Thanks for donate ${amount}!`));
+
     } catch (e) {
       console.error(e);
-      dispatch(updateMessage('Sorry, there is some error during payment. Please try again later.'));
+      dispatch(updateMessage(true, 'error', 'Sorry, there is some error during payment. Please try again later.'));
+    } finally {
+      setTimeout(function () {
+        dispatch(hideMessage(false));
+      }, 2000);
     }
   };
 };

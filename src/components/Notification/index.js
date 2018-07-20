@@ -3,22 +3,39 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const NotificationDiv = styled.div`
-  color: red;
-  margin: 1em 0;
   font-weight: bold;
   font-size: 16px;
   text-align: center;
+  transition: opacity 0.5s linear;
+  opacity: ${props => props.visible ? 1 : 0};
+  position: absolute;
+  right: 0%;
+  min-width: 400px;
+  max-width: 800px;
+  z-index: 99;
+  top: 20px;
+  
+  > div {
+    color: white;
+    background-color: ${props => props.level === 'success' ? 'yellowgreen' : 'darkred'};
+    padding: 1em 10px;
+    position: relative;
+    right: 10%;
+    box-shadow: 0px 0px 18px #BBB;
+  }
+  
 `;
 
 const Notification = props => {
   return (
-    <NotificationDiv>
-      {props.message}
+    <NotificationDiv visible={(props.visible)} level={props.level}>
+      <div><i className={`fas ${props.level === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}`}/> {props.message}</div>
     </NotificationDiv>
   );
 };
 
 Notification.propTypes = {
+  level: PropTypes.string,
   message: PropTypes.string,
 };
 

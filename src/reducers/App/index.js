@@ -2,6 +2,7 @@ const defaultState = {
   charities: [],
   donate: 0,
   message: '',
+  notification: null,
 };
 
 function app(state = defaultState, action) {
@@ -14,9 +15,16 @@ function app(state = defaultState, action) {
       return { ...state,
         donate: state.donate + action.amount,
       };
+    case 'HIDE_MESSAGE':
+      return { ...state,
+        notification: {
+          ...state.notification,
+          visible: action.visible,
+        },
+      }
     case 'UPDATE_MESSAGE':
       return { ...state,
-        message: action.message,
+        notification: action.notification,
       };
 
     default:

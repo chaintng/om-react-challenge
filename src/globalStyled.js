@@ -10,8 +10,17 @@ export default function injectGlobalByTheme(theme) {
           font-size: 1.1em;
         }
         
-        a.button, button {
+        h1, h2, h3, h4 {
+          margin: 0px;
+        }
+        
+        input, button {
+          padding: 0.25em 0.25em;
           font-size: 1em;
+          color: #666;
+        }
+        
+        a.button, button {
           padding: 0.25em 1em;
           border-radius: 3px;
           color: dodgerblue;

@@ -30,13 +30,13 @@ class App extends Component {
   }
 
   render() {
-    const {charities, donate, message} = this.props;
+    const {charities, donate, notification} = this.props;
 
     return (
       <div>
-        <h1 style={{ textAlign: 'center' }}>Tamboon React</h1>
+        <h1 style={{ textAlign: 'center' }}>Omise Tamboon React</h1>
         <p style={{ textAlign: 'center' }}>All donations: {donate}</p>
-        <Notification message={message}/>
+        <Notification {...notification} />
         <CardList charities={charities} handlePay={this.handlePay}/>
       </div>
     );
