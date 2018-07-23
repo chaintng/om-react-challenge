@@ -7,7 +7,7 @@ import FlipMove from 'react-flip-move';
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   position: relative;
   
   > div {
@@ -30,7 +30,7 @@ class CardList extends Component {
 
     return (
       <Wrapper>
-        <FlipMove typeName={null}>
+        <FlipMove typeName={null} leaveAnimation={'none'}>
           {cards}
         </FlipMove>
       </Wrapper>

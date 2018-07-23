@@ -36,11 +36,6 @@ const config = {
   plugins: [
     new webpack.EnvironmentPlugin( [ 'NODE_ENV', 'BACKEND_ENDPOINT' ]),
   ],
-  resolve: {
-    alias: {
-      '~': path.resolve(__dirname, 'src'),
-    },
-  },
 };
 
 module.exports = config;
