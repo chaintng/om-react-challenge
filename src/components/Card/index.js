@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import * as changeCase from 'change-case';
 import { donationAmountOption } from '~/constants';
-import { Wrapper, CardCaption, CardCoverImageWrapper, CardWithImageWrapper, PaymentOption, PaymentWrapper } from './styles';
+import { Wrapper, CardCaption, CardCoverImageWrapper, CardWithImageWrapper, PaymentOption, PaymentWrapper, RadioLabel } from './styles';
 
 function CardWithImage({name, handleDonate}) {
   return <CardWithImageWrapper>
@@ -18,18 +18,20 @@ function CardWithImage({name, handleDonate}) {
 
 function PaymentDialog({visible, id, currency, handleSelectAmount, handlePay, handleCloseDialog}) {
   const payments = donationAmountOption.map((amount, j) => (
-    <label key={j}>
+    <RadioLabel key={j}>
+      {amount}
       <input
         type="radio"
         name="payment"
         onClick={() => {
           handleSelectAmount(amount);
-        }} /> {amount}
-    </label>
+        }} />
+      <span className="checkmark"/>
+    </RadioLabel>
   ));
 
   return <PaymentWrapper visible={visible}>
-    <i className="fas fa-times" onClick={handleCloseDialog}></i>
+    <i className="fas fa-times" onClick={handleCloseDialog}/>
     <h3>Select the amount to donate ({currency})</h3>
     <PaymentOption>{payments}</PaymentOption>
     <div><button onClick={handlePay}>Pay</button></div>
