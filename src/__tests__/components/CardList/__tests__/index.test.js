@@ -1,6 +1,6 @@
 // Link.react.test.js
 import React from 'react';
-import CardList from '../components/CardList/index';
+import CardList from '../../../../components/CardList/index';
 import {shallow} from 'enzyme';
 
 const mockCharities = [
