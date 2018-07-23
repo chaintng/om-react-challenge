@@ -1,3 +1,4 @@
+require('dotenv').config({path: 'test.env'});
 const Enzyme = require('enzyme');
 const EnzymeAdapter = require('enzyme-adapter-react-16');
 

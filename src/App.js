@@ -37,7 +37,7 @@ class App extends Component {
     this.onSearch = this.onSearch.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(hydrateAppData());
   }
 

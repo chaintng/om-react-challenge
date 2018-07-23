@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import 'isomorphic-fetch';
 import config from '~/config';
 import {summaryDonations} from '~/helpers';
 import Promise from 'bluebird';
@@ -53,8 +53,8 @@ export const payDonation = ({charitiesId, amount, currency}) => {
         method: 'POST',
         body: JSON.stringify({ charitiesId, amount, currency }),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
 
       if (response.status === 404) {
@@ -77,6 +77,7 @@ export const payDonation = ({charitiesId, amount, currency}) => {
 
 export const hydrateAppData = () => {
   return async (dispatch) => {
+    console.log(1)
     const [charities, payments] = await Promise.all([
       fetch(`${config.BACKEND_ENDPOINT}/charities`).then((resp) => resp.json()),
       fetch(`${config.BACKEND_ENDPOINT}/payments`).then((resp) => resp.json()),

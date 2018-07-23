@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> when SearchKeywordChange, it dispatch the right action 1`] = `
+Array [
+  Object {
+    "searchKeyword": "kru",
+    "type": "SEARCH_KEYWORD_CHANGE",
+  },
+]
+`;

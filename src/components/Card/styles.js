@@ -125,4 +125,5 @@ export const RadioLabel = styled.label`
       opacity: 0;
       cursor: pointer;
   }
-`
+`;
+RadioLabel.displayName = 'RadioLabel';
