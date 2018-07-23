@@ -60,7 +60,7 @@ class App extends Component {
       <Wrapper>
         <Header>
           <DivContainer>
-            <h1>Omise Tamboon React</h1>
+            <h1>Tamboon React</h1>
             <div style={{ textAlign: 'center' }}>
               <div>TOTAL DONATION</div>
               <TotalDonation totalAmount={donate}></TotalDonation>
